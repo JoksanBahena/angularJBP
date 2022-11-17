@@ -33,5 +33,7 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
-
+</div>
+<div *ngIf="!session.logged">
+  <app-signin></app-signin>
 </div>

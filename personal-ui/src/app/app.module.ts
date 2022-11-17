@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { materialModules } from './types/material-modules';
@@ -21,7 +22,8 @@ import { PersonalModule } from './modules/personal/personal.module';
     LayoutModule,
     AuthModule,
     PersonalModule,
-    ...materialModules
+    ...materialModules,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

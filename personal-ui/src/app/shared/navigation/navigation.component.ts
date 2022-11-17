@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -20,6 +21,14 @@ export class NavigationComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+    this.session.logged = !!localStorage.getItem('token');
+    if(!this.session.logged) this.router.navigateByUrl('/auth')
+    /*
+    value = null;
+    !value = false;
+    !!value = true;
+    */
+  }
 
 }

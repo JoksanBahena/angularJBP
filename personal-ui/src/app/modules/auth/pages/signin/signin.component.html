@@ -67,13 +67,13 @@
                 mat-flat-button
                 class="w-50"
                 color="primary"
-                [disabled]="loginForm.invalid"
+                [disabled]="loginForm.invalid || isLoading"
               >
                 Log in
               </button>
             </div>
           </mat-card-actions>
-          <mat-card-footer>
+          <mat-card-footer *ngIf="isLoading">
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
           </mat-card-footer>
         </form>
