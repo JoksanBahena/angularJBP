@@ -12,8 +12,10 @@ import { map, shareReplay } from 'rxjs/operators';
 export class NavigationComponent {
 
   session:any = {
-    logged: false,
-  }
+    logged: true,
+  };
+
+  logoPath: string = "../../../assets/img/Logo.png"
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -22,7 +24,7 @@ export class NavigationComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
-    this.session.logged = !!localStorage.getItem('token');
+    /*this.session.logged = !!localStorage.getItem('token');
     if(!this.session.logged) this.router.navigateByUrl('/auth')
     /*
     value = null;

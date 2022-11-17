@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { MainPersonalComponent } from '../../modules/personal/pages/main-personal/main-personal.component';
 import { SigninComponent } from '../../modules/auth/pages/signin/signin.component';
@@ -9,6 +9,10 @@ const routes: Routes = [
     path:"",
     component:MainPersonalComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'personal',
+    component: MainPersonalComponent,
   },
   {
     path:"auth",
