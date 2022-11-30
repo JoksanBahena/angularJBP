@@ -23,27 +23,27 @@ export class PersonalService {
     return this.loading;
   }
 
+  set setIsLoading(value: boolean){
+    this.loading = value;
+  }
+
   constructor(private http: HttpClient) {}
 
   findAll(){
     this.loading = true;
-    this.http.get<any>(`${APP_URL}api/personal/`)
-        .pipe(
-            catchError((error) => {
-              this.loading = false;
-              return error;
-            })
-        ).subscribe((response: Personal[]) => {
+    this.http.get<any>(`${APP_URL}api/personal/`).subscribe((response: Personal[]) => {
           this.people = response;
           this.loading = false;
     });
   }
 
-  findById(){
-
+  findAllPositions(){
+    this.loading = true;
+    return this.http.get<any>(`${APP_URL}api/position/`);
   }
 
-  save(){
-
+  save(person: Personal){ 
+    this.loading = true;
+    return this.http.post<any>(`${APP_URL}api/personal/`, person);
   }
 }
