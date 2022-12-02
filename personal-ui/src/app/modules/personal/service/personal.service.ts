@@ -8,13 +8,15 @@ import {catchError} from "rxjs";
   providedIn: 'root'
 })
 export class PersonalService {
+  edit: boolean = false;
+  person!: Personal;
   private loading: boolean = false;
   private people: Personal[] = [];
 
   get personal(){
     return [...this.people];
   }
-
+  
   set setPersonal(person: Personal){
     this.people.push(person);
   }
@@ -45,5 +47,10 @@ export class PersonalService {
   save(person: Personal){ 
     this.loading = true;
     return this.http.post<any>(`${APP_URL}api/personal/`, person);
+  }
+
+  update(person: Personal){
+    this.loading = true;
+    return this.http.put<any>(`${APP_URL}api/personal/`, person);
   }
 }

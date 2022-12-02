@@ -65,11 +65,25 @@ export class MainPersonalComponent implements OnInit {
       disableClose: true,
     });
     modalRef.afterClosed().subscribe((result: any) => {
-      console.log("Closed ", result);
+      this.getAll();
     });
   }
 
   getAll() {
     this.personalService.findAll();
+  }
+
+  editPersonal(person: any) {
+    this.personalService.edit = true;
+    this.personalService.person = { 
+      ...person, 
+      position: { id: Number(person.position_id) },
+    birthday: person.birthday.split('T')[0] };
+    this.openDialog("2ms", "1ms");
+    
+  }
+
+  deletePersonal(person: Personal) {
+    console.log(person);
   }
 }

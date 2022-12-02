@@ -23,39 +23,49 @@ export class AddPersonalComponent implements OnInit {
   constructor(
     public modal: DialogRef<AddPersonalComponent>,
     private personalService: PersonalService
-  ) {}
+  ) {
+    this.person = this.personalService.person;
+  }
 
   ngOnInit(): void {
     this.getPositions();
+    
   }
 
   getPositions() {
     this.personalService.findAllPositions().subscribe((response) => {
       this.personalService.setIsLoading = false;
       this.positions = response;
+      console.log(this.person);
+      console.log(this.personalService.personal);
+      
     });
   }
 
   savePerson() {
-    this.personalService.save(this.person).subscribe((response) => {
-      this.personalService.setIsLoading = false;
-      console.log(this.person);
-      this.person = {
-        id: 0,
-        name: "",
-        surname: "",
-        lastname: "",
-        birthday: "",
-        salary: 0,
-        position: {},
-      };
+    if (this.personalService.edit) {
+      this.personalService.update(this.person).subscribe((response) => {
+        this.personalService.setIsLoading = false;
+      });
+    } else {
+      this.personalService.save(this.person).subscribe((response) => {
+        this.personalService.setIsLoading = false;
+        console.log(this.person);
+        this.person = {
+          id: 0,
+          name: "",
+          surname: "",
+          lastname: "",
+          birthday: "",
+          salary: 0,
+          position: {},
+        };
 
-      this.modal.close();
-
-      this.personalService.findAll();
-      //cerrar el modal
-      //limpiar el formulario
-      //consultar nuevamente la lista de personal
-    });
+        this.modal.close();
+        //cerrar el modal
+        //limpiar el formulario
+        //consultar nuevamente la lista de personal 
+      });
+    }
   }
 }
